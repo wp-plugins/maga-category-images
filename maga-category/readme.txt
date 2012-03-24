@@ -29,12 +29,12 @@ Setup Instructions:
 
 Example Usage:
 
-`<?php if($maga) : ?>`
-		`<img src = "<?php echo $maga->getImageInCategory(); ?>"/>`		
-`<?php endif; ?>	`
+`<?php if($maga) : ?>
+	<img src = "<?php echo $maga->getImageInCategory(); ?>"/>		
+  <?php endif; ?>	
 
-`<?php if($maga) : ?>`
-		`<img src = "<?php echo $maga->getSpecificImage(3); ?>"/>	`	
-`<?php endif; ?>	`
+  <?php if($maga) : ?>
+		<img src = "<?php echo $maga->getSpecificImage(3); ?>"/>
+  <?php endif; ?>`
 
 For any bug reports, comments or feedback, please email me at ricardo.magallanes@gmail.com
