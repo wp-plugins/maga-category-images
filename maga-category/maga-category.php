@@ -18,6 +18,30 @@ class CatImgHandler
 	{
 		add_action('admin_menu', array(&$this,'settings_page'));
 		add_action('wp_ajax_handle_response',array(&$this,'handle_response'));
+		add_action('wp_ajax_delete_row',array(&$this,'delete_row'));
+		add_action('wp_ajax_refresh_table',array(&$this,'refresh_table'));
+	}
+
+	public function perform_cleanup()
+	{
+		global $wpdb;
+		$current = get_categories("hide_empty=0");
+		$ids = array();
+		foreach($current as $c)
+		{
+			array_push($ids,$c->term_id);
+		}
+		$res = $wpdb->get_results(Controller::getCategoryIds());
+		foreach($res as $r)
+		{
+			if(!in_array($r->Category_ID,$ids))
+			{
+				$file = $wpdb->get_var(Controller::getFileName($r->Category_ID));
+				$path = "../wp-content/plugins/maga-category/img/".$file;
+				unlink($path);
+				$wpdb->query(Controller::deleteRow($r->Category_ID));
+			}
+		}
 	}
 
 	public function getSpecificImage($catId)
@@ -50,6 +74,42 @@ class CatImgHandler
 	public function renderMenu()
 	{
 		include 'views/settings.php';
+	}
+
+	public function getSettingsTable()
+	{
+		global $wpdb;
+		$res = $wpdb->get_results(Controller::getTableInformation());
+
+		$tbl = "<h3>Current Images</h3>";
+		$tbl.= '<table border = "1" width = "300" class = "myTable">';
+		$tbl.= "<tr><th>Category</th><th>Image</th><th>Delete</th>";
+		
+		foreach($res as $elem)
+		{
+			$path = get_bloginfo('url').'/wp-content/plugins/maga-category/img/'.$elem->Image_Path;
+			$delPath = get_bloginfo('url').'/wp-content/plugins/maga-category/system/delete.png';
+			$tbl.= '<tr><td>'.$elem->name.'</td><td><center><a class = "colorbox" href = "'.$path.'"><img src = "'.$path.'" class = "myImage"/></a></center></td>
+			<td><center><img src = "'.$delPath.'" class = "delIcon" onclick = "deleteRow('.$elem->Category_ID.');"/></center></td></tr>';
+		}
+		$tbl.="</table>";
+		return $tbl;
+	}
+
+	public function refresh_table()
+	{
+		die($this->getSettingsTable());
+	}
+
+	public function delete_row()
+	{
+		global $wpdb;
+		$id = $_GET['myId'];
+		$file = $wpdb->get_var(Controller::getFileName($id));
+		$path = "../wp-content/plugins/maga-category/img/".$file;
+		unlink($path);
+		$wpdb->query(Controller::deleteRow($id));
+		die($this->getSettingsTable());
 	}
 
 	public function createTable()

@@ -19,20 +19,24 @@
 			return QueryList::checkExisting($id);;
 		}
 
-		public static function insertRecord($id,$path)
-		{
-			return QueryList::insertRecord($id,$path);
-		}
-
-		public static function updateRecord($id,$path)
-		{
-			return QueryList::updateRecord($id,$path);
-		}
-
 		public static function getFileName($id)
 		{
 			return QueryList::getFilename($id);
 		}
 
+		public static function getTableInformation()
+		{
+			return QueryList::getTableInformation();
+		}
+
+		public static function deleteRow($id)
+		{
+			return QueryList::deleteRow($id);
+		}
+
+		public static function getCategoryIds()
+		{	
+			return QueryList::getCategoryIds();	
+		}
 	}
 ?>

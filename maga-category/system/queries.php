@@ -24,18 +24,25 @@
 			return "SELECT COUNT(*) FROM wp_image_category WHERE Category_ID = ".$id;
 		}
 
-		public static function insertRecord($id,$path)
-		{
-			return "INSERT INTO wp_image_category (Category_Id,Image_Path) VALUES (".$id.",'".$path."');";
-		}
-		public static function updateRecord($id,$path)
-		{
-			return "UPDATE wp_image_category set Image_Path = '".$path."' WHERE Category_ID = ".$id.";";
-		}
-
 		public static function getFilename($id)
 		{
 			return "SELECT Image_Path FROM wp_image_category WHERE Category_ID = ".$id;
 		}
+
+		public static function getCategoryIds()
+		{
+			return "SELECT Category_ID from wp_image_category;";
+		}
+
+		public static function getTableInformation()
+		{
+			return "SELECT name, Image_Path, Category_ID FROM wp_terms, wp_image_category WHERE wp_terms.term_id = wp_image_category.Category_ID ORDER BY Category_ID;";
+		}
+
+		public static function deleteRow($id)
+		{
+			return "DELETE FROM wp_image_category WHERE Category_ID = ".$id.";";
+		}
+
 	}
 ?>

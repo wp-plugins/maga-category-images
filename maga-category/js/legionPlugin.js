@@ -30,3 +30,39 @@ function validate()
 		return true;
 	}
 }
+
+function deleteRow(id)
+{
+	var conf = confirm("Do you want to delete this row ?");
+	if(conf)
+	{
+		$.ajax({
+			beforeSend: function()
+			{
+				$("#resultMsg").html("<h3>Processing...</h3>");
+			},
+			url: ajaxurl,
+			data : { action : "delete_row", myId : id },
+			success : function(response)
+			{
+				$("#resultMsg").html("<h3>Row Deleted Sucessfully!</h3>");
+				$("#tableTarget").html(response);
+				$(".colorbox").colorbox();
+			}
+		});
+	}
+}
+
+function refreshTable()
+{
+	$.ajax({
+		url: ajaxurl,
+		async: false,
+		data : { action : "refresh_table" },
+		success : function(response)
+			{
+				$("#tableTarget").html(response);
+			}
+	});
+	$(".colorbox").colorbox();
+}
