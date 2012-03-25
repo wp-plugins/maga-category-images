@@ -10,7 +10,6 @@ Associates an image file (jpg or png) to a given category.
 == Description ==
 
 Maga Category Images v1.1 By Ricardo Magallanes.
-
 Associates an image file (jpg or png) to a given category.
 
 == Installation ==
@@ -42,7 +41,7 @@ For any bug reports, comments or feedback, please email me at ricardo.magallanes
 == Upgrade Notice ==
 
 ==1.1==
-Added a table where you can view the images that are assigned to the category and added a cleanup functions that will clean
+Added a table where you can view the images that are assigned to the category and added a cleanup function that will clean
 the database of all records that belong to categories that are not in wordpress anymore.
 
 For any bug reports, comments or feedback, please email me at ricardo.magallanes@gmail.com
