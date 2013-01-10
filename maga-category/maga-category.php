@@ -3,7 +3,7 @@
 Plugin Name: Maga Category Images
 Plugin URI: http://divisionentrecero.mx
 Description: Allows us to associate an image to a given category.
-Version: 1.0
+Version: 1.2
 Author: Ricardo Magallanes Arco (@rMaga56)
 Author URI: http://divisionentrecero.mx
 License: GPL
