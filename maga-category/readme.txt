@@ -11,7 +11,7 @@ Associates an image file (jpg or png) to a given category.
 
 == Description ==
 
-Maga Category Images v1.1 By Ricardo Magallanes.
+Maga Category Images v1.2 By Ricardo Magallanes.
 
 Associates an image file (jpg or png) to a given category.
 
@@ -35,7 +35,7 @@ Setup Instructions:
 
 Example Usage:
 
-'<?php if($maga) : ?>
+`<?php if($maga) : ?>
 		<img src = "<?php echo $maga->getImageInCategory(); ?>"/>		
 <?php endif; ?>	
 
