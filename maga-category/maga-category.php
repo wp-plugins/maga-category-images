@@ -25,21 +25,22 @@ class CatImgHandler
 	public function perform_cleanup()
 	{
 		global $wpdb;
+		$prefix = $wpdb->prefix;
 		$current = get_categories("hide_empty=0");
 		$ids = array();
 		foreach($current as $c)
 		{
 			array_push($ids,$c->term_id);
 		}
-		$res = $wpdb->get_results(Controller::getCategoryIds());
+		$res = $wpdb->get_results(Controller::getCategoryIds($prefix));
 		foreach($res as $r)
 		{
 			if(!in_array($r->Category_ID,$ids))
 			{
-				$file = $wpdb->get_var(Controller::getFileName($r->Category_ID));
+				$file = $wpdb->get_var(Controller::getFileName($r->Category_ID,$prefix));
 				$path = "../wp-content/plugins/maga-category/img/".$file;
 				unlink($path);
-				$wpdb->query(Controller::deleteRow($r->Category_ID));
+				$wpdb->query(Controller::deleteRow($r->Category_ID,$prefix));
 			}
 		}
 	}
@@ -47,10 +48,11 @@ class CatImgHandler
 	public function getSpecificImage($catId)
 	{
 		global $wpdb;
-		$check = $wpdb->get_var(Controller::checkExisting($catId));
+		$prefix = $wpdb->prefix;
+		$check = $wpdb->get_var(Controller::checkExisting($catId,$prefix));
 		if($check != 0)
 		{
-			$res = $wpdb->get_var(Controller::getFileName($catId));
+			$res = $wpdb->get_var(Controller::getFileName($catId,$prefix));
 			return ''.get_bloginfo("url").'/wp-content/plugins/maga-category/img/'.$res;
 		}
 	}
@@ -79,17 +81,18 @@ class CatImgHandler
 	public function getSettingsTable()
 	{
 		global $wpdb;
-		$res = $wpdb->get_results(Controller::getTableInformation());
+		$prefix = $wpdb->prefix;
+		$res = $wpdb->get_results(Controller::getTableInformation($prefix));
 
 		$tbl = "<h3>Current Images</h3>";
 		$tbl.= '<table border = "1" width = "300" class = "myTable">';
-		$tbl.= "<tr><th>Category</th><th>Image</th><th>Delete</th>";
+		$tbl.= "<tr><th>ID</th><th>Category</th><th>Image</th><th>Delete</th>";
 		
 		foreach($res as $elem)
 		{
 			$path = get_bloginfo('url').'/wp-content/plugins/maga-category/img/'.$elem->Image_Path;
-			$delPath = get_bloginfo('url').'/wp-content/plugins/maga-category/system/delete.png';
-			$tbl.= '<tr><td>'.$elem->name.'</td><td><center><a class = "colorbox" href = "'.$path.'"><img src = "'.$path.'" class = "myImage"/></a></center></td>
+			$delPath = get_bloginfo('url').'/wp-content/plugins/maga-category/system/Delete.png';
+			$tbl.= '<tr><td>'.$elem->Category_ID.'</td><td>'.$elem->name.'</td><td><center><a class = "colorbox" href = "'.$path.'"><img src = "'.$path.'" class = "myImage"/></a></center></td>
 			<td><center><img src = "'.$delPath.'" class = "delIcon" onclick = "deleteRow('.$elem->Category_ID.');"/></center></td></tr>';
 		}
 		$tbl.="</table>";
@@ -98,23 +101,28 @@ class CatImgHandler
 
 	public function refresh_table()
 	{
-		die($this->getSettingsTable());
+		global $wpdb;
+		$prefix = $wpdb->prefix;
+		die($this->getSettingsTable($prefix));
 	}
 
 	public function delete_row()
 	{
 		global $wpdb;
+		$prefix = $wpdb->prefix;
 		$id = $_GET['myId'];
-		$file = $wpdb->get_var(Controller::getFileName($id));
+		$file = $wpdb->get_var(Controller::getFileName($id,$prefix));
 		$path = "../wp-content/plugins/maga-category/img/".$file;
 		unlink($path);
-		$wpdb->query(Controller::deleteRow($id));
-		die($this->getSettingsTable());
+		$wpdb->query(Controller::deleteRow($id,$prefix));
+		die($this->getSettingsTable($prefix));
 	}
 
 	public function createTable()
 	{
-		$sql = Controller::createTable();
+		global $wpdb;
+		$prefix = $wpdb->prefix;
+		$sql = Controller::createTable($prefix);
 		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 		dbDelta($sql);
 	}
@@ -122,12 +130,42 @@ class CatImgHandler
 	public function dropTable()
 	{
 		global $wpdb;
-		$sql = Controller::dropTable();
+		$prefix = $wpdb->prefix;
+		$sql = Controller::dropTable($prefix);
 		$wpdb->query($sql);
 		$files = glob(ABSPATH.'wp-content/plugins/maga-category/img/*');
 		foreach($files as $f)
 		{
 			unlink($f);
+		}
+	}
+	
+	public function getRecCombo($cat,$count)
+	{
+		$padding = "";
+		
+		for($i=0; $i<$count; $i++)
+		{
+			$padding.= '&nbsp;';
+		}
+		
+		if($count > 0)
+		{
+			$padding.= "-";
+		}
+		
+		foreach($cat as $elem)
+		{
+			$child = get_categories("hide_empty=0&parent=".$elem->term_id);
+			if(!$child)
+			{
+				echo '<option value ="'.$elem->term_id.'">'.$padding.$elem->name.'</option>';
+			}
+			else
+			{
+				echo '<option value ="'.$elem->term_id.'">'.$padding.$elem->name.'</option>';
+				echo $this->getRecCombo($child,$count+1);
+			}
 		}
 	}
 }

@@ -4,39 +4,39 @@
 
 	class Controller
 	{
-		public static function createTable()
+		public static function createTable($prefix)
 		{
-			return QueryList::createTable();
+			return QueryList::createTable($prefix);
 		}
 
-		public static function dropTable()
+		public static function dropTable($prefix)
 		{
-			return QueryList::dropTable();
+			return QueryList::dropTable($prefix);
 		}
 
-		public static function checkExisting($id)
+		public static function checkExisting($id,$prefix)
 		{
-			return QueryList::checkExisting($id);;
+			return QueryList::checkExisting($id,$prefix);;
 		}
 
-		public static function getFileName($id)
+		public static function getFileName($id,$prefix)
 		{
-			return QueryList::getFilename($id);
+			return QueryList::getFilename($id,$prefix);
 		}
 
-		public static function getTableInformation()
+		public static function getTableInformation($prefix)
 		{
-			return QueryList::getTableInformation();
+			return QueryList::getTableInformation($prefix);
 		}
 
-		public static function deleteRow($id)
+		public static function deleteRow($id,$prefix)
 		{
-			return QueryList::deleteRow($id);
+			return QueryList::deleteRow($id,$prefix);
 		}
 
-		public static function getCategoryIds()
+		public static function getCategoryIds($prefix)
 		{	
-			return QueryList::getCategoryIds();	
+			return QueryList::getCategoryIds($prefix);	
 		}
 	}
 ?>

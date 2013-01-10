@@ -2,8 +2,8 @@
 Contributors: maga56
 Tags: category,images
 Requires at least: 3.3.1
-Tested up to: 3.3.1
-Stable tag: 1.1
+Tested up to: 3.5
+Stable tag: 1.2
 
 Maga Category Images v1.1 By Ricardo Magallanes.
 
@@ -44,6 +44,12 @@ Example Usage:
 <?php endif; ?>`
 
 == Upgrade Notice ==
+
+==1.2==
+
+Addressed several bugfixes regarding the wordpress prefix and some icons that weren't visible.
+
+The category selection box now features a recursive function to traverse through all the categories at all levels.
 
 ==1.1==
 Added a table where you can view the images that are assigned to the category and added a cleanup functions that will clean

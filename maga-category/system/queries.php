@@ -2,9 +2,9 @@
 
 	class QueryList
 	{
-		 public static function createTable()
+		 public static function createTable($prefix)
 		 {
-			 $sql = "CREATE TABLE IF NOT EXISTS `wp_image_category`(
+			 $sql = "CREATE TABLE IF NOT EXISTS `".$prefix."image_category`(
  				`ID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
  				`Category_ID` bigint(20) unsigned NOT NULL DEFAULT '0',
  				`Image_Path` varchar(500) NOT NULL DEFAULT '',
@@ -13,35 +13,35 @@
 			  return $sql;
 		 }
 
-		public static function dropTable()
+		public static function dropTable($prefix)
 		{
-			return "DROP TABLE IF EXISTS wp_image_category;";
+			return "DROP TABLE IF EXISTS ".$prefix."image_category;";
 		}
 
 
-		public static function checkExisting($id)
+		public static function checkExisting($id,$prefix)
 		{
-			return "SELECT COUNT(*) FROM wp_image_category WHERE Category_ID = ".$id;
+			return "SELECT COUNT(*) FROM ".$prefix."image_category WHERE Category_ID = ".$id;
 		}
 
-		public static function getFilename($id)
+		public static function getFilename($id,$prefix)
 		{
-			return "SELECT Image_Path FROM wp_image_category WHERE Category_ID = ".$id;
+			return "SELECT Image_Path FROM ".$prefix."image_category WHERE Category_ID = ".$id;
 		}
 
-		public static function getCategoryIds()
+		public static function getCategoryIds($prefix)
 		{
-			return "SELECT Category_ID from wp_image_category;";
+			return "SELECT Category_ID from ".$prefix."image_category;";
 		}
 
-		public static function getTableInformation()
+		public static function getTableInformation($prefix)
 		{
-			return "SELECT name, Image_Path, Category_ID FROM wp_terms, wp_image_category WHERE wp_terms.term_id = wp_image_category.Category_ID ORDER BY Category_ID;";
+			return "SELECT name, Image_Path, Category_ID FROM ".$prefix."terms, ".$prefix."image_category WHERE ".$prefix."terms.term_id = ".$prefix."image_category.Category_ID ORDER BY Category_ID;";
 		}
 
-		public static function deleteRow($id)
+		public static function deleteRow($id,$prefix)
 		{
-			return "DELETE FROM wp_image_category WHERE Category_ID = ".$id.";";
+			return "DELETE FROM ".$prefix."image_category WHERE Category_ID = ".$id.";";
 		}
 
 	}

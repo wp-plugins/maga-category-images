@@ -29,7 +29,7 @@
 		});
 
 </script>
-		
+
 <h1>Category Image Assigner v1.0</h1>
 Author: Ricardo Magallanes Arco (Maga56)
 <hr/>
@@ -39,17 +39,11 @@ Author: Ricardo Magallanes Arco (Maga56)
 <h4>Choose a Category:</h4>
 <select name = "catId" id = "catId" onchange = "displayForm();">
 <option value = "0">Select a Category from the List</option>
-
 		<?php 
-			$cat = get_categories("hide_empty=0");
-		
-				foreach($cat as $elem)
-				{
-					echo '<option value ="'.$elem->term_id.'">'.$elem->name.'</option>';
-				}
+			$cat = get_categories("hide_empty=0&parent=0");
+			$this->getRecCombo($cat,0);
 		 ?>
-
-		</select><br/>
+</select><br/>
 
 <div id = "imageForm" style = "display:none; width: 600px;">
 		<form name = "myForm" id = "myForm" method = "post" enctype = "multipart/form-data" action = "/">
