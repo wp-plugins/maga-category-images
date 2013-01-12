@@ -30,7 +30,7 @@
 
 </script>
 
-<h1>Category Image Assigner v1.0</h1>
+<h1>Category Image Assigner v1.2.1</h1>
 Author: Ricardo Magallanes Arco (Maga56)
 <hr/>
 <br/>
