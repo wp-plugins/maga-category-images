@@ -1,11 +1,11 @@
 <?php $this->perform_cleanup(); ?>
 
-<link rel = "stylesheet" type = "text/css" href = "<?php bloginfo('url'); ?>/wp-content/plugins/maga-category/css/maga-category.css"/>
-<link rel = "stylesheet" type = "text/css" href = "<?php bloginfo('url'); ?>/wp-content/plugins/maga-category/css/colorbox.css"/>
+<link rel = "stylesheet" type = "text/css" href = "<?php bloginfo('url'); ?>/wp-content/plugins/maga-category-images/css/maga-category.css"/>
+<link rel = "stylesheet" type = "text/css" href = "<?php bloginfo('url'); ?>/wp-content/plugins/maga-category-images/css/colorbox.css"/>
 <script type = "text/javascript" src = "https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script type = "text/javascript" src = "<?php bloginfo('url'); ?>/wp-content/plugins/maga-category/js/legionPlugin.js"></script>
-<script type = "text/javascript" src = "<?php bloginfo('url'); ?>/wp-content/plugins/maga-category/js/jquery.form.js"></script>
-<script type = "text/javascript" src = "<?php bloginfo('url'); ?>/wp-content/plugins/maga-category/js/jquery.colorbox-min.js"></script>
+<script type = "text/javascript" src = "<?php bloginfo('url'); ?>/wp-content/plugins/maga-category-images/js/legionPlugin.js"></script>
+<script type = "text/javascript" src = "<?php bloginfo('url'); ?>/wp-content/plugins/maga-category-images/js/jquery.form.js"></script>
+<script type = "text/javascript" src = "<?php bloginfo('url'); ?>/wp-content/plugins/maga-category-images/js/jquery.colorbox-min.js"></script>
 <script type = "text/javascript">
 	$(document).ready(
 		function(){
