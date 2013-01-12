@@ -47,7 +47,7 @@ Example Usage:
 
 ==Upgrading to 1.2.1==
 
-If you are upgrading from an older version of this plugin it is very important that you backup your img folder found on this plugin's diretory before you upgrade.
+If you are upgrading from an older version of this plugin it is very important that you backup your img folder found on this plugin's directory before you upgrade.
 
 After you update the plugin overwrite the img folder with the old one, otherwise you will lose your images.
 
