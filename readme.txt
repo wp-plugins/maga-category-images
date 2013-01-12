@@ -51,7 +51,7 @@ If you are upgrading from an older version of this plugin it is very important t
 
 After you update the plugin overwrite the img folder with the old one, otherwise you will lose your images.
 
-I will provide a fix so that this is not necesary on the next update. Sorry for the inconvenience.
+I will provide a fix so that this is not necessary on the next update. Sorry for the inconvenience.
 
 ==1.2.1==
 
